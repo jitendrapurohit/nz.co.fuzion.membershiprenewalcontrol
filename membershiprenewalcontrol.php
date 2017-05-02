@@ -160,7 +160,7 @@ function membershiprenewalcontrol_civicrm_pre($op, $objectName, &$id, &$params) 
     }
     //Create new Pending membership in case of renewal and completetransaction is yet to be executed.
     elseif (!empty($params['contribution']) && $params['contribution']->contribution_status_id == $pendingStatus && in_array($existingMembership['status_id'], $nonRenewableStatuses)) {
-      $params['start_date'] = date('Ymd');
+      $params['join_date'] = $params['membership_start_date'] = $params['start_date'] = date('Ymd');
       $params['contact_id'] = $existingMembership['contact_id'];
       $params['status_id'] = civicrm_api3('MembershipStatus', 'getvalue', array(
         'label' => 'Pending',
